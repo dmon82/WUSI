@@ -11,7 +11,7 @@
 <body style="padding-top: 50px">
 <div class="ui container">
     <div class="ui center aligned piled segment">
-        <form class="ui form" id="input-form" onsubmit="event.preventDefault(); processText(); return false;">
+        <form class="ui form" id="input-form" onsubmit="return onSubmit(event);">
             <h4 class="ui dividing header">IDs</h4>
             <div class="three fields">
                 <div class="field">
@@ -233,6 +233,12 @@
         var range = document.createRange();
         range.selectNodeContents(outputElement);
         sel.addRange(range);
+    };
+
+    var onSubmit = function (event) {
+        event.preventDefault();
+        processText();
+        return false;
     };
 
     var processText = function () {
