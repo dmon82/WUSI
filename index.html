@@ -11,7 +11,7 @@
 <body style="padding-top: 50px">
 <div class="ui container">
     <div class="ui center aligned piled segment">
-        <form action="#" class="ui form" id="input-form" onsubmit="return onSubmit(event);">
+        <form action="#" class="ui form" id="input-form">
             <h4 class="ui dividing header">IDs</h4>
             <div class="three fields">
                 <div class="field">
@@ -235,15 +235,18 @@
         sel.addRange(range);
     };
 
-    var onSubmit = function (event) {
-        event.preventDefault();
+    var onSubmit = function (e) {
+        if (e.preventDefault) {
+            e.preventDefault();
+        }
+        e.returnValue = false;
+
         processText();
         return false;
     };
+    inputFormElement.addEventListener('submit', onSubmit, false);
 
     var processText = function () {
-        inputFormElement.submit();
-
         var content = inputElement.value.replace('\r', '\n');
         var ownerID = ownerIdElement.value;
         var localServerID = localServerIdElement.value;
