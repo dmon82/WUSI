@@ -303,7 +303,7 @@
                 return showError(i + 1, line, "Affinities can only be between 0 and 5, found '" + affinities + "'");
             }
             
-            if (affinities > 1) {
+            if (affinities > 0) {
                 sqlLines.push(
                     "INSERT OR REPLACE INTO affinities (wurmid, skill, number) " +
                     "VALUES (" + ownerID + ", " + skills[skillName] + ", " + affinities + ");");
