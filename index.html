@@ -15,12 +15,15 @@
             <h4 class="ui dividing header">IDs</h4>
             <div class="three fields">
                 <div class="field">
+                    <label for="local-server-id">Local server ID:</label>
                     <input type="number" id="local-server-id" min="0" max="65565" placeholder="localServerID" required>
                 </div>
                 <div class="field">
+                    <label for="player-skill-ids">playerSkillIDs value:</label>
                     <input type="number" id="player-skill-ids" min="0" max="65565" placeholder="playerSkillIDs" required>
                 </div>
                 <div class="field">
+                    <label for="owner-id">Player character ID:</label>
                     <input type="number" id="owner-id" placeholder="ownerID" required>
                 </div>
             </div>
@@ -324,6 +327,9 @@
             );
         }
 
+        sqlLines.push("-- Your new playerSkillIDs value is: " + playerSkillId);
+        sqlLines.splice(0, 0, "-- Your new playerSkillIDs value is: " + playerSkillId);
+        
         showResult(sqlLines.reduce(function(acc, element) {
             return acc + element + "\n";
         }, ''));
