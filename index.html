@@ -304,7 +304,7 @@
             }
 
             if (special.indexOf(skillName) > -1) {
-                sqlLines.push("UPDATE players SET " + skillName + " = " + max);
+                sqlLines.push("UPDATE players SET " + skillName + " = " + max + " WHERE wurmid = " + ownerID + ";");
                 continue;
             }
 
