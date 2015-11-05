@@ -1,6 +1,8 @@
 # WUSI
 Wurm Unlimited Skill Import
 
+Access the HTML directly by using https://rawgit.com/dmon82/WUSI/master/index.html
+
 This will take a character's skills dumped as a text file from the Wurm Online game client, and create SQL statements to import those values into a Wurm Unlimited server's database.
 
 Wurm Online is the official MMO version of the game, found at http://www.wurmonline.com, while Wurm Unlimited is a separate Steam release, offering a separated experience where users can run their own servers. Both versions are separated, so that playing a character with the same skills as on a user's WO account in WU, skills need to be imported.
