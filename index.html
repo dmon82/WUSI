@@ -286,10 +286,10 @@
                 return showError(i + 1, line, "Expected a min/max/affinity value");
             }
 
-            max = parseFloat(skillValueParts[1]);
-
+            max = Math.max(parseFloat(skillValueParts[0]), parseFloat(skillValueParts[1]));
+            
             if (isNaN(max)) {
-                return showError(i + 1, line, "Expected a number for max vlaue but found '" + skillValueParts[1] + "' instead");
+                return showError(i + 1, line, "Expected a number for max value but found '" + skillValueParts[0] + "' and '" + skillValueParts[1] + "' instead");
             }
 
             if (max < 0 || max > 100) {
@@ -310,7 +310,6 @@
                 sqlLines.push(
                     "INSERT OR REPLACE INTO affinities (wurmid, skill, number) " +
                     "VALUES (" + ownerID + ", " + skills[skillName] + ", " + affinities + ");");
-                continue;
             }
 
             if (special.indexOf(skillName) > -1) {
@@ -327,6 +326,9 @@
             );
         }
 
+        sqlLines.push(".open wurmlogin.db");
+        sqlLines.push("UPDATE ids SET playerSkillIds = " + playerSkillId + " WHERE server = " + localServerID + ";");
+        
         sqlLines.push("-- Your new playerSkillIDs value is: " + playerSkillId);
         sqlLines.splice(0, 0, "-- Your new playerSkillIDs value is: " + playerSkillId);
         
