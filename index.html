@@ -257,6 +257,7 @@
 
         var lines = content.split('\n');
         var sqlLines = [];
+        sqlLines.push(".open wurmplayers.db");
 
         var line, keyValue, skillName, skillValueParts, max, affinities, nextSkillId;
         for (var i = 0; i < lines.length; i++) {
@@ -322,8 +323,10 @@
             sqlLines.push(
                     "INSERT OR REPLACE INTO skills (id, owner, number, value, minvalue, lastused) " +
                     "VALUES (COALESCE((SELECT id FROM skills WHERE owner = " + ownerID + " AND number = " + skills[skillName] + "), " + nextSkillId.toString(10) + "), " +
-                    ownerID + ", " + skills[skillName] + ", " + max + ", " + max + ", " + Math.round((new Date()).getTime() / 1000) + ");"
-            );
+                        ownerID + ", " + skills[skillName] + ", " +
+                        "MAX(COALESCE((SELECT value FROM skills WHERE  owner = " + ownerID + " AND number = " + skills[skillName] + "), " + max + "), " + max + "), " +
+                        "MAX(COALESCE((SELECT value FROM skills WHERE  owner = " + ownerID + " AND number = " + skills[skillName] + "), " + max + "), " + max + "), " +
+                        Math.round((new Date()).getTime() / 1000) + ");"            );
         }
 
         sqlLines.push(".open wurmlogin.db");
